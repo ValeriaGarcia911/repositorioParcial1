@@ -9,15 +9,12 @@ public class Hotel{
     public int nIT;
     public String correo;
     public String paginaWeb;
-    private int ganancia;
-    private int numHuesped, numReserva, numHabitacion;
-    private String servioAdicional;
+    public int numHuesped, numReserva, numHabitacion;
 
     //Relaciones de la clase Hotel
     private List<Huesped> listHotelHuesped;
     private List<Reserva> listHotelReserva;
     private List<Habitacion> listHotelHabitacion;
-    private List<AdicionalServicio> listHotelAdicionalServicio;
 
 
     /**
@@ -27,27 +24,22 @@ public class Hotel{
      * @param nIT             del Hotel
      * @param correo          del Hotel
      * @param paginaWeb       del Hotel
-     * @param ganancia        del Hotel
      * @param numHuesped      del Hotel
      * @param numReserva      del Hotel
      * @param numHabitacion   del Hotel
-     * @param servioAdicional del Hotel
      */
     public Hotel(String nombre, int nIT, String correo, String paginaWeb, int ganancia, int numHuesped, int numReserva, int numHabitacion, String servioAdicional) {
         this.nombre = nombre;
         this.nIT = nIT;
         this.correo = correo;
         this.paginaWeb = paginaWeb;
-        this.ganancia = ganancia;
         this.numHuesped = numHuesped;
         this.numReserva = numReserva;
         this.numHabitacion = numHabitacion;
-        this.servioAdicional = servioAdicional;
 
         this.listHotelHuesped = new ArrayList<>();
         this.listHotelReserva = new ArrayList<>();
         this.listHotelHabitacion = new ArrayList<>();
-        this.listHotelAdicionalServicio = new ArrayList<>();
     }
 
     /**
@@ -58,30 +50,53 @@ public class Hotel{
      * @param telefono  del nuevo huesped
      * @param correo    del nuevo huesped
      * @param pais      del nuevo huesped
-     * @return
      */
-    public String registrarHuesped(String nombre, int documento, int telefono, String correo, String pais) {
+    public String registrarHuesped(String nombre, int documento, int telefono, String correo, String pais){
         String registrado = "";
         Huesped huesped = buscarHuesped(documento);
-        if (huesped == null) {
+        if(huesped == null){
             Huesped huesped1 = new Huesped(nombre, documento, telefono, correo, pais);
             listHotelHuesped.add(huesped1);
             registrado = "El Huesped de nombre" + nombre + "Fue añadido exitosamente";
-        } else {
+        }else {
             registrado = "El Huesped de nombre" + nombre + "Ya esta registrado";
         }
         return registrado;
     }
 
     /**
-     * Metodo que permite encontrar a un Huesped registrado
+     * Metodo para hacer una reserva
      *
+     * @param codReserva          para hacer una reserva
+     * @param fechaRealizacion    para hacer una reserva
+     * @param fechaEntrada        para hacer una reserva
+     * @param fechaSalida         para hacer una reserva
+     * @param metodoPago          para hacer una reserva
+     * @param habitacionReservada para hacer una reserva
+     * @param serAdicional para hacer una reserva
+     * @return
+     */
+    public String registarReserva(int codReserva, int fechaRealizacion, int fechaEntrada, int fechaSalida, String metodoPago, int habitacionReservada, int serAdicional){
+        String registro = "";
+        Reserva reserva = buscarReserva(codReserva);
+        if (reserva == null){
+            Reserva res1 = new Reserva(codReserva,fechaRealizacion,fechaEntrada,fechaSalida,metodoPago,habitacionReservada, serAdicional);
+            listHotelReserva.add(res1);
+            registro = "La reserva de codigo" + codReserva + "Fue añadido exitosamente";
+        }else{
+            registro = "La reserva con el codigo" + codReserva + "Ya existe, intenta otro codigo";
+        }
+        return registro;
+    }
+
+    /**
+     * Metodo que permite encontrar a un Huesped registrado
      * @param documento del huesped a encontrar
      * @return
      */
-    public Huesped buscarHuesped(int documento) {
+    public Huesped buscarHuesped(int documento){
         Huesped encontrado = null;
-        for (int i = 0; i < listHotelHuesped.size(); i++) {
+        for(int i = 0; i < listHotelHuesped.size(); i++) {
             Huesped huesped = listHotelHuesped.get(i);
             if (huesped.getDocumento() == documento) {
                 encontrado = huesped;
@@ -91,6 +106,23 @@ public class Hotel{
         return encontrado;
     }
 
+    /**
+     * Metodo para buscar una reserva
+     * @param codReserva para buscar una reserva
+     * @return
+     */
+    public  Reserva buscarReserva(int codReserva){
+        Reserva encontrar = null;
+        for(int i = 0; i < listHotelReserva.size();i++){
+            Reserva reserva = listHotelReserva.get(i);
+            if (reserva.getCodReserva() == codReserva){
+                encontrar = reserva;
+                break;
+            }
+
+        }
+        return encontrar;
+    }
     @Override
     public String toString() {
         return "Hotel{" +
@@ -99,6 +131,8 @@ public class Hotel{
                 ", correo='" + correo + '\'' +
                 ", paginaWeb='" + paginaWeb + '\'' +
                 '}';
+    }
+}
     }
 }
 
