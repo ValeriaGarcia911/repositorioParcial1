@@ -6,13 +6,13 @@ import java.util.List;
 //Atributos de Reserva
 public class Reserva {
     public int codReserva;
-    public String fechaRealizacion, fechaEntrada, fechaSalida;
+    public int fechaRealizacion, fechaEntrada, fechaSalida;
     public String estadoReserva;
     public String metodoPago;
-    public double valorTotal;
-    public String habitacionReservada;
-    public String serviosAdicionales;
-    public int estadia;
+    public int valorTotal;
+    public int habitacionReservada;
+    public int serviosAdicionales;
+    
 
     //Relaciones de la clase Reserva
     private List<Habitacion> listReservaHabitacion;
@@ -30,10 +30,10 @@ public class Reserva {
      * @param metodoPago de la Reserva
      * @param valorTotal de la Reserva
      * @param habitacionReservada de la Reserva
-     * @param serviosAdicionales de la Reserva
-     * @param estadia de la Reserva
+     * @param serAdicional de la Reserva
+    
      */
-    public Reserva(int codReserva,String fechaRealizacion,String fechaEntrada,String fechaSalida,String estadoReserva,String metodoPago, double valorTotal,String habitacionReservada,String serviosAdicionales,int estadia){
+    public Reserva(int codReserva,int fechaRealizacion,int fechaEntrada,int fechaSalida,int estadoReserva,String metodoPago, int valorTotal,int habitacionReservada,int serAdicional,){
         this.codReserva = codReserva;
         this.fechaRealizacion = fechaRealizacion;
         this.fechaEntrada = fechaEntrada;
@@ -42,8 +42,7 @@ public class Reserva {
         this.metodoPago = metodoPago;
         this.valorTotal = valorTotal;
         this.habitacionReservada = habitacionReservada;
-        this.serviosAdicionales = serviosAdicionales;
-        this.estadia = estadia;
+        this.serAdicional = serAdicional;
 
         this.listReservaHuesped = new ArrayList<>();
         this.listReservaHabitacion = new ArrayList<>();
