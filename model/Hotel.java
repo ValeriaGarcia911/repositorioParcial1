@@ -7,7 +7,6 @@ import java.util.List;
 public class Hotel{
     public String nombre;
     public int nIT;
-    public String correo;
     public String paginaWeb;
     public int numHuesped, numReserva, numHabitacion;
 
@@ -15,7 +14,6 @@ public class Hotel{
     private List<Huesped> listHotelHuesped;
     private List<Reserva> listHotelReserva;
     private List<Habitacion> listHotelHabitacion;
-
 
     /**
      * Metodo constructor del Hotel
@@ -28,10 +26,10 @@ public class Hotel{
      * @param numReserva      del Hotel
      * @param numHabitacion   del Hotel
      */
-    public Hotel(String nombre, int nIT, String correo, String paginaWeb, int ganancia, int numHuesped, int numReserva, int numHabitacion, String servioAdicional) {
+
+    public Hotel(String nombre, int nIT, String paginaWeb, String direccion, int telefono, List<Huesped> listHotelHuesped, List<Reserva> listHotelReserva, List<Habitacion> listHotelHabitacion, List<AdicionalServicio> listHotelAdicionalServicio) {
         this.nombre = nombre;
         this.nIT = nIT;
-        this.correo = correo;
         this.paginaWeb = paginaWeb;
         this.numHuesped = numHuesped;
         this.numReserva = numReserva;
@@ -126,12 +124,18 @@ public class Hotel{
     @Override
     public String toString() {
         return "Hotel{" +
-                "nIT=" + nIT +
-                ", nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
+                "nombre='" + nombre + '\'' +
+                ", nit=" + nit +
                 ", paginaWeb='" + paginaWeb + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono=" + telefono +
+                ", listhotelHuesped=" + listhotelHuesped +
+                ", listhotelReserva=" + listhotelReserva +
+                ", listhotelHabitacion=" + listhotelHabitacion +
+                ", listHotelAdicionalServicio=" + listHotelAdicionalServicio +
                 '}';
     }
+
 }
     }
 }
