@@ -37,7 +37,28 @@ public class Main{
                     JOptionPane.showMessageDialog(null, "Huesped encontrado:\n" + huesped.toString());
                 } else {
                     JOptionPane.showMessageDialog(null, "El huesped no existe");
-                }
+                }else if(opcion == 3){
+                int codReserva = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un codigo"));
+                int fechaRealizacion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la fecha de Realizacion"));
+                int fechaEntrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la fecha de Entrada"));
+                int fechaSalida = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la fecha de Salida"));
+                String metodoPago = JOptionPane.showInputDialog(null, "Ingrese su medio de pago (Efectivo, tarjeta o transferencia)");
+                int serAdicional = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea algun cervio adicional?(1 Restaurante, 2 Lavanderia, 3 Transporte, 4 Servicio a la habitacion)"));
+                int habitacionReservada = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el tipo de habitacion (1 individual, 2 Doble, 3 Suit"));
+                hotel.registarReserva(codReserva,fechaRealizacion,fechaEntrada,fechaSalida,metodoPago,habitacionReservada,serAdicional);
+                }else if (opcion == 4) {
+                    int codReserva = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo con el que registro su reserva:"));
+                    Reserva reserva = hotel.buscarReserva(codReserva);
+                 if (reserva != null) {
+                     JOptionPane.showMessageDialog(null, "Reserva encontrada:\n" + reserva.toString());
+            }else {
+                     JOptionPane.showMessageDialog(null, "La reserva no existe");
+                 }
+            }
+        }
+    }
+}
+
             }
         }
     }
