@@ -8,112 +8,118 @@ public class Hotel{
     public String nombre;
     public int nIT;
     public String paginaWeb;
-    public String direccion;
-    public int telefono;
-
-
+    public int numHuesped, numReserva, numHabitacion;
 
     //Relaciones de la clase Hotel
     private List<Huesped> listHotelHuesped;
     private List<Reserva> listHotelReserva;
     private List<Habitacion> listHotelHabitacion;
-    private List<AdicionalServicio> listHotelAdicionalServicio;
 
     /**
-     * constructor de la clase Hotel
-     * @param nombre
-     * @param nIT
-     * @param paginaWeb
-     * @param direccion
-     * @param telefono
-     * @param listHotelHuesped
-     * @param listHotelReserva
-     * @param listHotelHabitacion
-     * @param listHotelAdicionalServicio
+     * Metodo constructor del Hotel
+     *
+     * @param nombre          del Hotel
+     * @param nIT             del Hotel
+     * @param correo          del Hotel
+     * @param paginaWeb       del Hotel
+     * @param numHuesped      del Hotel
+     * @param numReserva      del Hotel
+     * @param numHabitacion   del Hotel
      */
 
     public Hotel(String nombre, int nIT, String paginaWeb, String direccion, int telefono, List<Huesped> listHotelHuesped, List<Reserva> listHotelReserva, List<Habitacion> listHotelHabitacion, List<AdicionalServicio> listHotelAdicionalServicio) {
         this.nombre = nombre;
         this.nIT = nIT;
         this.paginaWeb = paginaWeb;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.listHotelHuesped = listHotelHuesped;
-        this.listHotelReserva = listHotelReserva;
-        this.listHotelHabitacion = listHotelHabitacion;
-        this.listHotelAdicionalServicio = listHotelAdicionalServicio;
+        this.numHuesped = numHuesped;
+        this.numReserva = numReserva;
+        this.numHabitacion = numHabitacion;
+
+        this.listHotelHuesped = new ArrayList<>();
+        this.listHotelReserva = new ArrayList<>();
+        this.listHotelHabitacion = new ArrayList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    /**
+     * Metodo para registarar un nuevo huesped
+     *
+     * @param nombre    del nuevo huesped
+     * @param documento del nuevo huesped
+     * @param telefono  del nuevo huesped
+     * @param correo    del nuevo huesped
+     * @param pais      del nuevo huesped
+     */
+    public String registrarHuesped(String nombre, int documento, int telefono, String correo, String pais){
+        String registrado = "";
+        Huesped huesped = buscarHuesped(documento);
+        if(huesped == null){
+            Huesped huesped1 = new Huesped(nombre, documento, telefono, correo, pais);
+            listHotelHuesped.add(huesped1);
+            registrado = "El Huesped de nombre" + nombre + "Fue añadido exitosamente";
+        }else {
+            registrado = "El Huesped de nombre" + nombre + "Ya esta registrado";
+        }
+        return registrado;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    /**
+     * Metodo para hacer una reserva
+     *
+     * @param codReserva          para hacer una reserva
+     * @param fechaRealizacion    para hacer una reserva
+     * @param fechaEntrada        para hacer una reserva
+     * @param fechaSalida         para hacer una reserva
+     * @param metodoPago          para hacer una reserva
+     * @param habitacionReservada para hacer una reserva
+     * @param serAdicional para hacer una reserva
+     * @return
+     */
+    public String registarReserva(int codReserva, int fechaRealizacion, int fechaEntrada, int fechaSalida, String metodoPago, int habitacionReservada, int serAdicional){
+        String registro = "";
+        Reserva reserva = buscarReserva(codReserva);
+        if (reserva == null){
+            Reserva res1 = new Reserva(codReserva,fechaRealizacion,fechaEntrada,fechaSalida,metodoPago,habitacionReservada, serAdicional);
+            listHotelReserva.add(res1);
+            registro = "La reserva de codigo" + codReserva + "Fue añadido exitosamente";
+        }else{
+            registro = "La reserva con el codigo" + codReserva + "Ya existe, intenta otro codigo";
+        }
+        return registro;
     }
 
-    public int getnIT() {
-        return nIT;
+    /**
+     * Metodo que permite encontrar a un Huesped registrado
+     * @param documento del huesped a encontrar
+     * @return
+     */
+    public Huesped buscarHuesped(int documento){
+        Huesped encontrado = null;
+        for(int i = 0; i < listHotelHuesped.size(); i++) {
+            Huesped huesped = listHotelHuesped.get(i);
+            if (huesped.getDocumento() == documento) {
+                encontrado = huesped;
+                break;
+            }
+        }
+        return encontrado;
     }
 
-    public void setnIT(int nIT) {
-        this.nIT = nIT;
-    }
+    /**
+     * Metodo para buscar una reserva
+     * @param codReserva para buscar una reserva
+     * @return
+     */
+    public  Reserva buscarReserva(int codReserva){
+        Reserva encontrar = null;
+        for(int i = 0; i < listHotelReserva.size();i++){
+            Reserva reserva = listHotelReserva.get(i);
+            if (reserva.getCodReserva() == codReserva){
+                encontrar = reserva;
+                break;
+            }
 
-    public String getPaginaWeb() {
-        return paginaWeb;
-    }
-
-    public void setPaginaWeb(String paginaWeb) {
-        this.paginaWeb = paginaWeb;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public List<Huesped> getListHotelHuesped() {
-        return listHotelHuesped;
-    }
-
-    public void setListHotelHuesped(List<Huesped> listHotelHuesped) {
-        this.listHotelHuesped = listHotelHuesped;
-    }
-
-    public List<Reserva> getListHotelReserva() {
-        return listHotelReserva;
-    }
-
-    public void setListHotelReserva(List<Reserva> listHotelReserva) {
-        this.listHotelReserva = listHotelReserva;
-    }
-
-    public List<Habitacion> getListHotelHabitacion() {
-        return listHotelHabitacion;
-    }
-
-    public void setListHotelHabitacion(List<Habitacion> listHotelHabitacion) {
-        this.listHotelHabitacion = listHotelHabitacion;
-    }
-
-    public List<AdicionalServicio> getListHotelAdicionalServicio() {
-        return listHotelAdicionalServicio;
-    }
-
-    public void setListHotelAdicionalServicio(List<AdicionalServicio> listHotelAdicionalServicio) {
-        this.listHotelAdicionalServicio = listHotelAdicionalServicio;
+        }
+        return encontrar;
     }
 
 
@@ -181,5 +187,7 @@ public class Hotel{
                 '}';
     }
 
+}
+    }
 }
 
