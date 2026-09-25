@@ -7,11 +7,11 @@ import java.util.List;
 public class Hotel{
     public String nombre;
     public int nIT;
-    public String correo;
     public String paginaWeb;
-    private int ganancia;
-    private int numHuesped, numReserva, numHabitacion;
-    private String servioAdicional;
+    public String direccion;
+    public int telefono;
+
+
 
     //Relaciones de la clase Hotel
     private List<Huesped> listHotelHuesped;
@@ -19,86 +19,116 @@ public class Hotel{
     private List<Habitacion> listHotelHabitacion;
     private List<AdicionalServicio> listHotelAdicionalServicio;
 
-
     /**
-     * Metodo constructor del Hotel
-     *
-     * @param nombre          del Hotel
-     * @param nIT             del Hotel
-     * @param correo          del Hotel
-     * @param paginaWeb       del Hotel
-     * @param ganancia        del Hotel
-     * @param numHuesped      del Hotel
-     * @param numReserva      del Hotel
-     * @param numHabitacion   del Hotel
-     * @param servioAdicional del Hotel
+     * constructor de la clase Hotel
+     * @param nombre
+     * @param nIT
+     * @param paginaWeb
+     * @param direccion
+     * @param telefono
+     * @param listHotelHuesped
+     * @param listHotelReserva
+     * @param listHotelHabitacion
+     * @param listHotelAdicionalServicio
      */
-    public Hotel(String nombre, int nIT, String correo, String paginaWeb, int ganancia, int numHuesped, int numReserva, int numHabitacion, String servioAdicional) {
+
+    public Hotel(String nombre, int nIT, String paginaWeb, String direccion, int telefono, List<Huesped> listHotelHuesped, List<Reserva> listHotelReserva, List<Habitacion> listHotelHabitacion, List<AdicionalServicio> listHotelAdicionalServicio) {
         this.nombre = nombre;
         this.nIT = nIT;
-        this.correo = correo;
         this.paginaWeb = paginaWeb;
-        this.ganancia = ganancia;
-        this.numHuesped = numHuesped;
-        this.numReserva = numReserva;
-        this.numHabitacion = numHabitacion;
-        this.servioAdicional = servioAdicional;
-
-        this.listHotelHuesped = new ArrayList<>();
-        this.listHotelReserva = new ArrayList<>();
-        this.listHotelHabitacion = new ArrayList<>();
-        this.listHotelAdicionalServicio = new ArrayList<>();
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.listHotelHuesped = listHotelHuesped;
+        this.listHotelReserva = listHotelReserva;
+        this.listHotelHabitacion = listHotelHabitacion;
+        this.listHotelAdicionalServicio = listHotelAdicionalServicio;
     }
 
-    /**
-     * Metodo para registarar un nuevo huesped
-     *
-     * @param nombre    del nuevo huesped
-     * @param documento del nuevo huesped
-     * @param telefono  del nuevo huesped
-     * @param correo    del nuevo huesped
-     * @param pais      del nuevo huesped
-     * @return
-     */
-    public String registrarHuesped(String nombre, int documento, int telefono, String correo, String pais) {
-        String registrado = "";
-        Huesped huesped = buscarHuesped(documento);
-        if (huesped == null) {
-            Huesped huesped1 = new Huesped(nombre, documento, telefono, correo, pais);
-            listHotelHuesped.add(huesped1);
-            registrado = "El Huesped de nombre" + nombre + "Fue añadido exitosamente";
-        } else {
-            registrado = "El Huesped de nombre" + nombre + "Ya esta registrado";
-        }
-        return registrado;
+    public String getNombre() {
+        return nombre;
     }
 
-    /**
-     * Metodo que permite encontrar a un Huesped registrado
-     *
-     * @param documento del huesped a encontrar
-     * @return
-     */
-    public Huesped buscarHuesped(int documento) {
-        Huesped encontrado = null;
-        for (int i = 0; i < listHotelHuesped.size(); i++) {
-            Huesped huesped = listHotelHuesped.get(i);
-            if (huesped.getDocumento() == documento) {
-                encontrado = huesped;
-                break;
-            }
-        }
-        return encontrado;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    public int getnIT() {
+        return nIT;
+    }
+
+    public void setnIT(int nIT) {
+        this.nIT = nIT;
+    }
+
+    public String getPaginaWeb() {
+        return paginaWeb;
+    }
+
+    public void setPaginaWeb(String paginaWeb) {
+        this.paginaWeb = paginaWeb;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public List<Huesped> getListHotelHuesped() {
+        return listHotelHuesped;
+    }
+
+    public void setListHotelHuesped(List<Huesped> listHotelHuesped) {
+        this.listHotelHuesped = listHotelHuesped;
+    }
+
+    public List<Reserva> getListHotelReserva() {
+        return listHotelReserva;
+    }
+
+    public void setListHotelReserva(List<Reserva> listHotelReserva) {
+        this.listHotelReserva = listHotelReserva;
+    }
+
+    public List<Habitacion> getListHotelHabitacion() {
+        return listHotelHabitacion;
+    }
+
+    public void setListHotelHabitacion(List<Habitacion> listHotelHabitacion) {
+        this.listHotelHabitacion = listHotelHabitacion;
+    }
+
+    public List<AdicionalServicio> getListHotelAdicionalServicio() {
+        return listHotelAdicionalServicio;
+    }
+
+    public void setListHotelAdicionalServicio(List<AdicionalServicio> listHotelAdicionalServicio) {
+        this.listHotelAdicionalServicio = listHotelAdicionalServicio;
+    }
     @Override
     public String toString() {
         return "Hotel{" +
-                "nIT=" + nIT +
-                ", nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
+                "nombre='" + nombre + '\'' +
+                ", nit=" + nit +
                 ", paginaWeb='" + paginaWeb + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono=" + telefono +
+                ", listhotelHuesped=" + listhotelHuesped +
+                ", listhotelReserva=" + listhotelReserva +
+                ", listhotelHabitacion=" + listhotelHabitacion +
+                ", listHotelAdicionalServicio=" + listHotelAdicionalServicio +
                 '}';
     }
+
 }
 
