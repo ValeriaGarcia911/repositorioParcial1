@@ -115,6 +115,57 @@ public class Hotel{
     public void setListHotelAdicionalServicio(List<AdicionalServicio> listHotelAdicionalServicio) {
         this.listHotelAdicionalServicio = listHotelAdicionalServicio;
     }
+
+
+    /**
+     * Metodo para registrar un nuevo huesped
+     * @param nombre
+     * @param documento
+     * @param telefono
+     * @param correo
+     * @param pais
+     * @return
+     */
+    public String registrarHuesped(String nombre, int documento, int telefono, String correo, String pais) {
+        String registrado;
+        Huesped huesped = buscarHuesped(documento);
+        if (huesped == null) {
+            listHotelHuesped.add(new Huesped(nombre, documento, telefono, correo, pais));
+            registrado = "El Huesped de nombre " + nombre + " fue añadido exitosamente";
+        } else {
+            registrado = "El Huesped de nombre " + nombre + " ya esta registrado";
+        }
+        return registrado;
+    }
+
+    /**
+     * Metodo que permite encontrar a un Huesped registrado
+     * @param documento
+     * @return
+     */
+    public Huesped buscarHuesped(int documento) {
+        for (Huesped huesped : listHotelHuesped) {
+            if (huesped.getDocumento() == documento) {
+                return huesped;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Elimina un huesped registrado, si existe.
+     * @param documento
+     * @return
+     */
+    public boolean eliminarHuesped(int documento) {
+        Huesped huesped = buscarHuesped(documento);
+        if (huesped != null) {
+            listHotelHuesped.remove(huesped);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
